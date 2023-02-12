@@ -14,12 +14,12 @@ public class LeaderboardController : ControllerBase
     public LeaderboardController(LeaderboardServices leaderboardServices) =>
         _leaderboardServices = leaderboardServices;
 
-    // GET: api/Scores
+    // GET: /Leaderboard
     [HttpGet]
     public async Task<List<LeaderboardEntry>> Get() =>
         await _leaderboardServices.GetAsync();
 
-    // GET: api/Scores/5
+    // GET: /Leaderboard/{id}
     [HttpGet("{id:length(24)}")]
     public async Task<ActionResult<LeaderboardEntry>> Get(string id)
     {
@@ -34,7 +34,7 @@ public class LeaderboardController : ControllerBase
     }
 
 
-    // POST: api/Score
+    // POST: /Leaderboard
     [HttpPost]
     public async Task<IActionResult> Post(LeaderboardEntry newLeaderboardEntry)
     {
@@ -43,7 +43,7 @@ public class LeaderboardController : ControllerBase
         return CreatedAtAction(nameof(Get), new { id = newLeaderboardEntry.Id }, newLeaderboardEntry);
     }
 
-    // PUT: api/Score/5
+    // PUT: /Leaderboard/{id}
     [HttpPut("{id:length(24)}")]
     public async Task<IActionResult> Update(string id, LeaderboardEntry updatedLeaderboardEntry)
     {
@@ -61,6 +61,7 @@ public class LeaderboardController : ControllerBase
         return NoContent();
     }
 
+    // DELETE: /Leaderboard/{id}
     [HttpDelete("{id:length(24)}")]
     public async Task<IActionResult> Delete(string id)
     {
